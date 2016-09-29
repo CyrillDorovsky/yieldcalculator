@@ -1,0 +1,53 @@
+%h2 Вклад
+.list-group
+  %a.list-group-item.list-group-item-success{:href => "#"} Сумма вклада: #{@deposite.sum} ₽
+  %a.list-group-item.list-group-item-info{:href => "#"} Количество инвесторов: #{@entities.count}
+  %a.list-group-item.list-group-item-info{:href => "#"} Срок займа: #{@deposite.period} мес.
+  %a.list-group-item.list-group-item-warning{:href => "#"} Ожидаемый доход #{@payment_pie.expected_revenue * 100}%, #{@payment_pie.expected_revenue * @deposite.sum}₽
+  %a.list-group-item.list-group-item-danger{:href => "#"} Реальный доход #{(@payment_pie.real_revenue * 100).round(2)}%, #{@payment_pie.real_revenue.round(4) * @deposite.sum}₽
+
+%h2 Выплаты
+%ul.nav.nav-tabs
+  %li.active.col-md-3
+    %a{"data-toggle" => "tab", :href => "#entity_1"} ЮЛ 1
+  %li.col-md-3
+    %a{"data-toggle" => "tab", :href => "#entity_2"} ЮЛ 2
+  %li.col-md-3
+    %a{"data-toggle" => "tab", :href => "#entity_3"} ЮЛ 3
+  %li.col-md-3
+    %a{"data-toggle" => "tab", :href => "#entity_4"} ЮЛ 4
+.tab-content
+  #entity_1.tab-pane.fade.in.active
+    - @first_ul_payments.each do |payment|
+      .col-md-4
+        .list-group
+          %a.list-group-item.list-group-item-success{:href => "#"} Сумма: #{payment.sum}
+          %a.list-group-item.list-group-item-info{:href => "#"} Месяц: #{payment.month}
+          %a.list-group-item.list-group-item-warning{:href => "#"} Общий ежемесячный #{payment.total_month}
+
+  #entity_2.tab-pane.fade
+    - @second_ul_payments.each do |payment|
+      .col-md-4
+        .list-group
+          %a.list-group-item.list-group-item-success{:href => "#"} Сумма: #{payment.sum}
+          %a.list-group-item.list-group-item-info{:href => "#"} Месяц: #{payment.month}
+          %a.list-group-item.list-group-item-warning{:href => "#"} Общий ежемесячный #{payment.total_month}
+
+  #entity_3.tab-pane.fade
+    - @third_ul_payments.each do |payment|
+      .col-md-4
+        .list-group
+          %a.list-group-item.list-group-item-success{:href => "#"} Сумма: #{payment.sum}
+          %a.list-group-item.list-group-item-info{:href => "#"} Месяц: #{payment.month}
+          %a.list-group-item.list-group-item-warning{:href => "#"} Общий ежемесячный #{payment.total_month}
+
+  #entity_4.tab-pane.fade
+    - if @fourth_ul_payments.empty?
+      %p Данные не обнаружены
+    - else
+      - @fourth_ul_payments.each do |payment|
+        .col-md-4
+          .list-group
+            %a.list-group-item.list-group-item-success{:href => "#"} Сумма: #{payment.sum}
+            %a.list-group-item.list-group-item-info{:href => "#"} Месяц: #{payment.month}
+            %a.list-group-item.list-group-item-warning{:href => "#"} Общий ежемесячный #{payment.total_month}

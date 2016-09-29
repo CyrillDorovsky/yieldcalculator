@@ -1,0 +1,15 @@
+%ul.nav.nav-tabs
+  %li.active.col-md-6
+    %a{"data-toggle" => "tab", :href => "#panel1"} Исторические данные
+  %li.col-md-6
+    %a{"data-toggle" => "tab", :href => "#panel2"} Калькулятор
+.tab-content
+  #panel1.tab-pane.fade.in.active
+    .container
+      .text-center
+        = render 'history', deposite: @deposite
+  #panel2.tab-pane.fade
+    .container
+      .text-center
+        = render 'calculator', deposite: @deposite
+

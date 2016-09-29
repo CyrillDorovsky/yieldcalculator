@@ -1,0 +1,22 @@
+= form_for @calculate_deposite, as: :deposite, url: calculate_path do |f|
+  %h3 Сумма вклада, ₽
+  = f.text_field :sum, style: 'height:3em;text-align:center;font-size:40px', plcaholder: '500000', class: 'required form-control', type: 'number', min: 10000, max: 500000
+.list-group
+  %a.list-group-item.list-group-item-success{:href => "#"} Ожидаемая доходность: #{(@payment_pie.expected_revenue * 100).round(2)}%
+  %a#expected_money.list-group-item.list-group-item-success{:href => "#"} Ожидаемый доход:
+
+  %a.list-group-item.list-group-item-info{:href => "#"} Фактическая доходность(по историческим данным): #{(@payment_pie.real_revenue * 100).round(2)}%
+  %a#real_money.list-group-item.list-group-item-info{:href => "#"} Фактический доход: 
+
+:javascript
+  $(document).ready( function() {
+    $('#deposite_sum').keyup(function(e) {
+      deposite = $('#deposite_sum').val()
+      expected_revenue = #{@payment_pie.expected_revenue.round(2)} * deposite
+      real_revenue = #{@payment_pie.real_revenue.round(2)} * deposite
+
+      $('#expected_money').html('Ожидаемый доход: ' + expected_revenue + '₽' )
+      $('#real_money').html('Ожидаемый доход: ' + real_revenue + '₽' )
+      
+    });
+  })
