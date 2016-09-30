@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20160928165528) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "deposites", force: :cascade do |t|
     t.integer  "investor_id"
     t.integer  "period"
